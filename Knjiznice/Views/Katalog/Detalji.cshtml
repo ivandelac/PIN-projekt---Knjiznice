@@ -1,0 +1,118 @@
+﻿@model Knjiznice.Models.Katalog.GradjaDetaljiModel
+
+<!--koristim bootstrap styles i classes -->
+<div class="container">
+    <div class="page-header" clearfix detailheading">
+        <h2 class="text-muted">Pregled jedinice građe</h2>
+    </div>
+</div>
+
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-md-4">
+            <div>
+                <img class="detailImage" src="@Model.ImageURL" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <p id="gradjaNaslov">@Model.Naslov</p>
+            <p id="gradjaAutor">@Model.AutorOrRedatelj</p>
+            <p id="gradjaStatus">@Model.Status</p>
+            <p id="gradjaVrsta">@Model.Vrsta</p>
+            <p id="gradjaLokacija">@Model.Lokacija</p>
+
+            @if (Model.Status == "Izgubljeno")
+            {
+                <p>Ova jedinica građe je izgubljena i ne može se posuditi</p>
+                <p><a class="btn btn-lg btn-danger" role="button" asp-controller="Katalog" asp-action="OznaciNadjeno" asp-route-id="@Model.GradjaId">Označi kao nađeno</a></p>
+
+            }
+
+            @if (Model.Status == "Izdano")
+            {
+                <p id="gradjaClan">Izdano: @Model.Clan</p>
+                <p><a class="btn btn-lg btn-success" role="button" asp-controller="Katalog" asp-action="Vrati" asp-route-id="@Model.GradjaId">Vrati</a></p>
+                <p><a class="btn btn-lg btn-warning" role="button" asp-controller="Katalog" asp-action="Rezervacija" asp-route-id="@Model.GradjaId">Rezerviraj</a></p>
+
+            }
+
+            @if (Model.Status == "Raspoloživo")
+            {
+                <p><a class="btn btn-lg btn-info" role="button" asp-controller="Katalog" asp-action="Posudba" asp-route-id="@Model.GradjaId">Posudi</a></p>
+
+            }
+        </div>
+        <div class="col-md-4">
+            <table>
+                <tr>
+                    <td class="itemLabel">ISBN:</td>
+                    <td class="itemValue">@Model.ISBN</td>
+                </tr>
+
+                <tr>
+                    <td class="itemLabel">Cijena:</td>
+                    <td class="itemValue">@Model.Cijena</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <h4>Povijest posudbi</h4>
+        <table class="table table-bordered table-hover table-condensed">
+            <thead>
+                <tr>
+                    <th>Izdano</th>
+                    <th>Vraćeno</th>
+                    <th>Članska iskaznica</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var posudba in @Model.PovijestPosudbi)
+                {
+                    <tr>
+                        <td>
+                            @posudba.Posudjeno
+                        </td>
+                        <td>
+                            @posudba.Vraceno
+                        </td>
+                        <td>
+                            @posudba.ClanskaIskaznica.Id
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-lg-6">
+        <h4>Trenutne rezervacije</h4>
+        <table class="table table-bordered table-hover table-condensed">
+            <thead>
+                <tr>
+                    <th>Rezervirano</th>
+                    <th>Član</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var rezervacija in @Model.TrenutneRezervacije)
+                {
+                    <tr>
+                        <td>
+                            @rezervacija.Rezervirano
+                        </td>
+                        <td>
+                            @rezervacija.Clan
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

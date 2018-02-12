@@ -1,0 +1,28 @@
+﻿@model Knjiznice.Models.Knjiznica.KnjiznicaIndeksModel
+@{
+    ViewBag.Title = "Knjižnica";
+}
+<h3>Knjižnica</h3>
+<div id="knjiznica">
+    <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp customTable" id="knjiznicaTable">
+        <thead>
+            <tr>
+                <th>Naziv knjižnice</th>
+                <th>Otvoreno</th>
+                <th>Broj građe</th>
+                <th>Broj članova</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var knjiznica in Model.Knjižnice)
+            {
+                <tr>
+                    <td class="strongTd"><a asp-controller="Knjiznice" asp-action="Detalji" asp-route-id="@knjiznica.Id">@knjiznica.Naziv</a></td>
+                    <td>@knjiznica.Otvoreno</td>
+                    <td>@knjiznica.BrojGradje</td>
+                    <td>@knjiznica.BrojClanova</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

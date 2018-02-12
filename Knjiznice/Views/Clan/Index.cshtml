@@ -1,0 +1,33 @@
+﻿@model Knjiznice.Models.Clan.ClanIndexModel
+@{ 
+    ViewBag.Title = "Popis Članova";
+}
+
+<h3>@ViewBag.Title</h3>
+<div id="popisClanova">
+    <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp customTable" id="popisClanovaTable">
+        <thead>
+            <tr>
+                <th>Profil</th>
+                <th>Prezime</th>
+                <th>Ime</th>
+                <th>Broj članske iskaznice</th>
+                <th>Zakasnine</th>
+                <th>Matična knjižnica</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var clan in Model.Clanovi)
+            {
+                <tr>
+                    <td id="clanIcon"><a asp-controller="Clan" asp-action="Detalji" asp-route-id="@clan.Id"><i class="fa fa-user fa-2x"></i></a></td>
+                    <td>@clan.Prezime</td>
+                    <td>@clan.Ime</td>
+                    <td>@clan.ClanskaIskaznicaId</td>
+                    <td>@clan.Zakasnine</td>
+                    <td>@clan.MaticnaKnjiznica</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

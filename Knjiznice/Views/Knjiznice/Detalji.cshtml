@@ -1,0 +1,60 @@
+﻿@model Knjiznice.Models.Knjiznica.KnjiznicaDetailModel
+@{
+    ViewBag.Title = @Model.Naziv;
+}
+
+
+
+<div class="container">
+    <div class="header clearfix detailHeading">
+        <h2 class="text-muted">Podaci o knjižnici</h2>
+    </div>
+    <div class="jumbotron">
+        <div class="row">
+            <img src="@Model.ImageUrl" />
+        </div>
+        <div class="row knjiznicaInfo">
+            <div class="col-md-8">
+                <div>
+                    <h2>@Model.Naziv</h2>
+                    <div class="knjiznicaKontakt">
+                        <div id="knjiznicaAdresa">Adresa: @Model.Adresa</div>
+                        <div id="knjiznicaTelefon">Telefon: @Model.Telefon</div>
+                    </div>
+                    <div id="knjiznicaOpis">
+                        <p class="caption">@Model.Opis</p>
+                    </div>
+
+                    <div id="radnoVrijeme">
+                        <ul>
+                            @foreach (var dan in @Model.RadnoVrijeme)
+                            {
+                                <li>@dan</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 detailInfo">
+                <table>
+                    <tr>
+                        <td class="itemLabel">Datum otvaranja: </td>
+                        <td class="itemValue">@Model.DatumOtvaranja</td>
+                    </tr>
+                    <tr>
+                        <td class="itemLabel">Broj članova: </td>
+                        <td class="itemValue">@Model.BrojClanova</td>
+                    </tr>
+                    <tr>
+                        <td class="itemLabel">Broj građe: </td>
+                        <td class="itemValue">@Model.BrojGradje</td>
+                    </tr>
+                    <tr>
+                        <td class="itemLabel">Vrijednost građe: </td>
+                        <td class="itemValue">@Model.VrijednostGradje kn</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+﻿@model Knjiznice.Models.Posudba.PosudbaModel
+@{
+    ViewBag.Title = @Model.Naslov;
+}
+
+
+<div class="container">
+    <div class="header clearfix detailHeading">
+        <h2 class="text-muted">Rezerviraj</h2>
+    </div>
+
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-md-3">
+                <div>
+                    <p id="itemTitle">@Model.Naslov</p>
+                    <img class="detailImage" src="@Model.ImageUrl" />
+                </div>
+            </div>
+            @*Išlo bi i sa tag helperom*@
+            <div class="col-md-9">
+                <p>Trenutno postoji @Model.BrojRezervacija rezervacija za navedenu građu</p>
+                @*HTML helper*@
+                @using (Html.BeginForm("Rezerviraj", "Katalog", FormMethod.Post))
+                {
+                    @Html.HiddenFor(a => a.GradjaId)
+                    <div>
+                        Unesite broj članske iskaznice.
+                        @Html.TextBoxFor(a => a.ClanskaIskaznicaId)
+                        @*write out a text box and set attributes according to info in the model*@
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-info btn-lg">Rezerviraj</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

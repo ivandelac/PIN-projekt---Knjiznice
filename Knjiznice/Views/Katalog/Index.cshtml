@@ -1,0 +1,37 @@
+﻿@model  Knjiznice.Models.Katalog.GradjaIndeksModel
+
+<div id="gradja">
+    <h3>Katalog knjižnice</h3>
+    <div id="gradjaTablica">
+        <table class="table table-condensed" id="katalogIndexTable">
+            <thead>
+                <tr>
+                    <th>Slika</th>
+                    <th>Naslov</th>
+                    <th>Autor / Redatelj</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!--RAZER sintaksa da dinamički generiramo svaki red tablice -->
+                @foreach (var gradja in Model.Gradja)
+    {
+            <tr class="assetRow">
+                <td class="">
+                    
+                    <a asp-controller="Katalog" asp-action="Detalji" asp-route-id="@gradja.Id">
+                        <img src="@gradja.ImageURL" class="imageCell" />
+                    </a>
+
+                </td>
+                <td class="">@gradja.Naslov</td>
+                <td class="">@gradja.AutorOrRedatelj</td>
+            </tr>
+
+}
+            </tbody>
+        </table>
+    </div>
+
+
+
+</div>

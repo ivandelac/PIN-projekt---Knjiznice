@@ -1,0 +1,80 @@
+﻿@model Knjiznice.Models.Clan.ClanDetailModel
+
+<div class="container">
+    <div class="header clearfix detailHeading">
+        <h2 class="text-muted">Podaci o članu</h2>
+    </div>
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-md-4">
+                <div>
+                    <h2>@Model.Ime @Model.Prezime</h2>
+                    <div class="clanKontaktPodaci">
+                        <div id="clanIskaznica">Library Card ID: @Model.ClanskaIskaznicaId</div>
+                        <div id="clanAdresa">Address: @Model.Adresa</div>
+                        <div id="clanTelefon">Telephone: @Model.KontaktBroj</div>
+                        <div id="clanUclanjen">Member Since: @Model.Uclanjen</div>
+                        <div id="clanKnjiznica">Home Library: @Model.MaticnaKnjiznica</div>
+                        @if (@Model.Zakasnine > 0)
+                        {
+                            <div id="clanImaZakasninu">Zakasnine: @Model.Zakasnine kn</div>
+                        }
+                        else
+                        {
+                            <div id="clanNemaZakasninu">Nema zakasnina</div>
+
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h4>Posuđena građa</h4>
+                @if (@Model.PosudjenaGradja.Any())
+                {
+                    <div id="clanGradja">
+                        <ul>
+                            @foreach (var posudba in @Model.PosudjenaGradja)
+                            {
+                                <li>
+                                    @posudba.GradjaKnjiznice.Naslov - (Građa ID: @posudba.GradjaKnjiznice.Id)
+                                    <ul>
+                                        <li>
+                                            Od: @posudba.Od
+                                        </li>
+                                        <li>
+                                            Do: @posudba.Do
+                                        </li>
+                                    </ul>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+                else
+                {
+                    <div>Nema posudbi</div>
+
+                }
+            </div>
+
+            <div class="col-md-4">
+                <h4>Rezervirana građa</h4>
+                @if (@Model.Rezervacije.Any())
+                {
+                    <div id="clanRezervacije">
+                        <ul>
+                            @foreach (var rezervacija in @Model.Rezervacije)
+                            {
+                                <li>@rezervacija.GradjaKnjiznice.Naslov - Rezervirano @rezervacija.Rezervirano.ToString("yy-dd-MM - HH:mm")</li>
+                            }
+                        </ul>
+                    </div>
+                }
+                else
+                {
+                    <div>Nema rezervacija</div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
