@@ -21,7 +21,7 @@ Korištene su sljedeće tehnologije/metode:
                          o knjižnicama -> svaki model ima pripadajući View
  
  2) Data layer (KnjizniceData) - class library sa entity modelima , migracijama i interface-ima
-                               - u interfacima su definirane metode koje kontroleri pozivaju ovisno u korisnikovom requestu
+                               - u interfacima su definirane metode koje kontroleri pozivaju ovisno o korisnikovom requestu
                                
- 3) Service layer - servisi u kojima su detaljno opisane metode (business logic) koje se preko interface injectaju u kontrolere 
-                    (dependency injection)
+ 3) Service layer (KnjizniceServisi) - class library sa servisima u kojima su detaljno opisane metode (business logic) koje se preko    
+                                       interface-a (data layer) injectaju u pripadajuće kontrolere.
